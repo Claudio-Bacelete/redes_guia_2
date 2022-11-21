@@ -21,6 +21,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.redes.redes.Data.DetalheUsuario;
 import com.redes.redes.Model.Usuario;
+import com.redes.redes.Utils.JWTUtil;
 
 public class JWTAuthFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager manager;
@@ -29,11 +30,9 @@ public class JWTAuthFilter extends UsernamePasswordAuthenticationFilter {
         this.manager = manager;
     }
 
-    @Value("${jwt.algoritmo}")
-    private String algoritmo;
+    private String algoritmo = JWTUtil.algoritmo;
 
-    @Value("${jwt.expiracao}")
-    private Integer expiracao;
+    private Integer expiracao = JWTUtil.expiracao;
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)

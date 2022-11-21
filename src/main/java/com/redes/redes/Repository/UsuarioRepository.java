@@ -11,6 +11,7 @@ import com.redes.redes.Model.Usuario;
 @Repository
 public class UsuarioRepository {
     private List<Usuario> listUsuarios = new ArrayList<Usuario>();
+    private Long count = 0l;
 
     public List<Usuario> getAllUsuarios() {
         return listUsuarios;
@@ -23,5 +24,11 @@ public class UsuarioRepository {
             }
         }
         return Optional.empty();
+    }
+
+    public Usuario save(Usuario usuario) {
+        usuario.setId(count++);
+        listUsuarios.add(usuario);
+        return usuario;
     }
 }

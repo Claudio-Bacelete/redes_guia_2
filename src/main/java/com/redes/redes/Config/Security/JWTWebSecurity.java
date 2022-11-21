@@ -28,7 +28,8 @@ public class JWTWebSecurity extends WebSecurityConfigurerAdapter {
             // -- Swagger UI v3 (OpenAPI)
             "/v3/api-docs/**",
             "/swagger-ui/**",
-            "/login"
+            "/login",
+            "/usuario/cadastrar"
     };
 
     private final DetalheUsuarioServiceImpl serviceImpl;

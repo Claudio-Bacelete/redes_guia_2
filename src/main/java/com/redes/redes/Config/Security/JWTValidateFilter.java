@@ -9,7 +9,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,13 +16,13 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.redes.redes.Utils.JWTUtil;
 
 public class JWTValidateFilter extends BasicAuthenticationFilter {
     public static final String HEADER = "Authorization";
     public static final String PREFIXO = "Bearer ";
 
-    @Value("${jwt.algoritmo}")
-    private String algoritmo;
+    private String algoritmo = JWTUtil.algoritmo;
 
     public JWTValidateFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);

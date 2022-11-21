@@ -19,7 +19,7 @@ public class DetalheUsuarioServiceImpl implements UserDetailsService {
     private UsuarioRepository repository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public DetalheUsuario loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Usuario> usuario = repository.findByEmail(username);
         if (usuario.isEmpty()) {
             throw new UsernameNotFoundException("Email não encontrado !\n");

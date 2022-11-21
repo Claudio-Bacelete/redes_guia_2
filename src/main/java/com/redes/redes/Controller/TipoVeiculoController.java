@@ -3,6 +3,7 @@ package com.redes.redes.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +26,7 @@ public class TipoVeiculoController {
 
     @ApiOperation(value = "Listar todos os tipos de Veículo com Fatores de Multiplicação")
     @GetMapping()
-    public List<TipoVeiculo> findAllTipoVeiculos() {
+    public List<TipoVeiculo> findAllTipoVeiculos(Authentication auth) {
         return service.getAllTipoVeiculos();
     }
 

@@ -16,6 +16,10 @@ public class DetalheUsuario implements UserDetails {
         this.usuario = usuario;
     }
 
+    public Usuario getUsuario() {
+        return this.usuario.get();
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // TODO Auto-generated method stub

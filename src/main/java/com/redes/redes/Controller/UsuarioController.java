@@ -26,8 +26,7 @@ public class UsuarioController {
     @Autowired
     EmailService emailService;
 
-    @PostMapping
-    @RequestMapping(value = "/cadastrar")
+    @PostMapping(value = "/cadastrar")
     @ApiOperation(value = "Adicionar valores de Usuário")
     public Usuario addUsuario(@RequestBody UsuarioDTO dto) {
         Usuario usuario = service.saveUsuario(dto);

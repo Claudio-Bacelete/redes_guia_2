@@ -47,4 +47,7 @@ public class Veiculo {
         novoVeiculo.setCustoTotal(custoTotal);
     }
 
+    @ManyToOne()
+    private Usuario usuario;
+
 }

@@ -3,6 +3,7 @@ package com.redes.redes.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.redes.redes.DTO.VeiculoDTO;
+import com.redes.redes.Data.DetalheUsuario;
+import com.redes.redes.Model.Usuario;
 import com.redes.redes.Model.Veiculo;
+import com.redes.redes.Services.DetalheUsuarioServiceImpl;
 import com.redes.redes.Services.VeiculoService;
 
 import io.swagger.annotations.ApiOperation;
@@ -24,10 +28,14 @@ public class VeiculoController {
     @Autowired
     private VeiculoService service;
 
+    @Autowired
+    private DetalheUsuarioServiceImpl usuarioService;
+
     @PostMapping
     @ApiOperation(value = "Adicionar valores de Veículo")
-    public Veiculo addVeiculo(@RequestBody VeiculoDTO Veiculo) {
-        return service.saveVeiculo(Veiculo);
+    public Veiculo addVeiculo(Authentication auth, @RequestBody VeiculoDTO veiculoDTO) {
+        DetalheUsuario usuario = usuarioService.loadUserByUsername(auth.getName());
+        return service.saveVeiculo(veiculoDTO, usuario);
     }
 
     @GetMapping

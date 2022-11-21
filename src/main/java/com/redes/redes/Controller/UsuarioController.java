@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.redes.redes.DTO.UsuarioDTO;
+import com.redes.redes.Model.EmailDetails;
 import com.redes.redes.Model.Usuario;
+import com.redes.redes.Services.EmailService;
 import com.redes.redes.Services.UsuarioService;
 
 import io.swagger.annotations.ApiOperation;
@@ -21,11 +23,17 @@ public class UsuarioController {
     @Autowired
     UsuarioService service;
 
+    @Autowired
+    EmailService emailService;
+
     @PostMapping
     @RequestMapping(value = "/cadastrar")
     @ApiOperation(value = "Adicionar valores de Usuário")
-    public Usuario addUsuario(@RequestBody UsuarioDTO usuario) {
-        return service.saveUsuario(usuario);
+    public Usuario addUsuario(@RequestBody UsuarioDTO dto) {
+        Usuario usuario = service.saveUsuario(dto);
+        EmailDetails details = new EmailDetails(dto.getEmail(), "Seja Bem vindo !", "Usuário Cadastrado !");
+        emailService.sendSimpleMail(details);
+        return usuario;
     }
 
 }
